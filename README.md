@@ -1,4 +1,4 @@
-To run the Task Mangement application, please make the below naccesary changes in to your machine.
+To run the Task Mangement application, please make the below necessary changes in to your machine.
 
 Angular:
 Angular CLI: 10.0.3
