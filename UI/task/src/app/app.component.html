@@ -1,0 +1,86 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <span class="title" >My CRUD APP</span>
+    <div class="spacer"></div>
+</div>
+
+<div class="content" role="main">
+  <img style="height: 242px;" src="../assets/taskimg" >
+  <table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of dataset">
+            <td>{{task.description}}</td>
+            <td>{{task.shortDescription}}</td>
+            <td>{{task.status}}</td>
+            <td>{{task.priority}}</td>
+            <td><button (click)="deleteTask(task)" type="button" class="btn btn-icon btn-danger" aria-label="trash"> 
+              <clr-icon shape="trash"></clr-icon> Delete
+          </button><button (click)="openUpdatePopup(task)" type="button" class="btn btn-primary" aria-label="edit"> 
+            <clr-icon shape="note"></clr-icon> Update
+        </button></td>
+        </tr>
+    </tbody>
+  </table>
+  <span *ngIf="!isDataLoaded" class="spinner spinner-md">
+  Loading...
+  </span>
+  <button (click)="openNewPopup()" style="margin: 12px 0px 0px -783px;" class="btn btn-primary">Add a new row</button>
+  <div style="width: 100%; margin-top: 40px;">
+  <!-- Footer -->
+  <footer style="background-color: #333; color: #fff;">
+    <span style="display: flex; margin-left: 35%;">Designed and coded with   <p style="color: #fff;">&hearts;  by Lokendra kumar </p> </span>
+</footer>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="addTaskPopup">
+  <h3 class="modal-title">Add a new task</h3>
+  <div class="modal-body">
+    <form clrForm>
+      <clr-input-container>
+        <label>Task</label>
+        <input placeholder="Task" clrInput [(ngModel)]="txtTask" name="txtTask" required />
+        <clr-control-error>Task is required!</clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Description</label>
+        <input placeholder="Description" clrInput [(ngModel)]="txtDesc" name="txtDesc" required />
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="addTaskPopup = false">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="addTask()">Add</button>
+  </div>
+</clr-modal>
+<clr-modal [(clrModalOpen)]="updateTaskPopup">
+  <h3 class="modal-title">Update task</h3>
+  <div class="modal-body">
+    <form clrForm>
+      <clr-input-container>
+        <label>Task</label>
+        <input placeholder="Task" clrInput [(ngModel)]="txtTask" name="txtTask" required />
+        <clr-control-error>Task is required!</clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Description</label>
+        <input placeholder="Description" clrInput [(ngModel)]="txtDesc" name="txtDesc" required />
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="updateTaskPopup = false">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="updateTask()" >Update</button>
+  </div>
+</clr-modal>
+
+<router-outlet></router-outlet>
